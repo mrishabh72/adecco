@@ -57,5 +57,8 @@ class StringCalculatorTest {
 		String resultMsg = ex.getMessage();
 		assertTrue(desiredMsg.equals(resultMsg));
 	}
-	
+	@Test
+	void ignoreNumberBiggerThanThousand() {
+		assertEquals(2, cal.add("2,1001"));
+	}
 }

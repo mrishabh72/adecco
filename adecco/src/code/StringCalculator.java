@@ -20,9 +20,9 @@ public class StringCalculator {
 			if (!strs[0].isEmpty()) {
 				for (String strNum : strs) {
 					int num = Integer.parseInt(strNum);
-					if (num >= 0) {
+					if (num >= 0  && num<=1000) {
 						sum += num;
-					} else {
+					} else if(num<0) {
 						errMsg += num + ",";
 					}
 				}
