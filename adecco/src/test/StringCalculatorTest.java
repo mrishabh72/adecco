@@ -65,4 +65,8 @@ class StringCalculatorTest {
 	void sumThreeNumbersSeperatedByAnyDelimiterOfAnyLength() {
 		assertEquals(6, cal.add("//[***]\n1***2***3"));
 	}
+	@Test
+	void sumThreeNumbersSeperatedByDifferentDelimiter() {
+		assertEquals(6, cal.add("//[*][%]\n1*2%3"));
+	}
 }

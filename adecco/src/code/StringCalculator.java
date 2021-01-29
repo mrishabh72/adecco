@@ -1,5 +1,7 @@
 package code;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
@@ -8,17 +10,34 @@ public class StringCalculator {
 
 	public int add(String numbers) {
 		int sum = 0;
-		String delimiter = ",";
+		StringBuilder delimiter = new StringBuilder(",");
 		String errMsg = ERROR_MESSAGE;
 
 		if (numbers.startsWith("//[")) {
-			delimiter = numbers.substring(3, numbers.indexOf("]"));
-			numbers = numbers.substring(4 + delimiter.length());
+			delimiter = new StringBuilder("");
+			numbers = numbers.substring(numbers.indexOf("["));
+
+			List<StringBuilder> regBlock = new ArrayList<>();
+			while (numbers.contains("[")) {
+				String seperatorPattern = numbers.substring(numbers.indexOf("[") + 1, numbers.indexOf("]"));
+				char[] seperatorPatternChars = seperatorPattern.toCharArray();
+				for (int i = 0; i < seperatorPatternChars.length; i++) {
+					if (i >= regBlock.size()) {
+						regBlock.add(new StringBuilder());
+					}
+					regBlock.get(i).append(seperatorPatternChars[i]);
+
+				}
+				numbers = numbers.substring(numbers.indexOf("]") + 1);
+			}
+			for (StringBuilder reg : regBlock) {
+				delimiter.append("[").append(reg).append("]");
+			}
 		} else if (numbers.startsWith("//")) {
-			delimiter = numbers.substring(2, numbers.indexOf("\n"));
+			delimiter = new StringBuilder(numbers.substring(2, numbers.indexOf("\n")));
 			numbers = numbers.substring(2 + delimiter.length());
 		}
-		Pattern pattern = Pattern.compile(delimiter, Pattern.LITERAL);
+		Pattern pattern = Pattern.compile(delimiter.toString());
 		String[] line = numbers.split("\n");
 		for (String str : line) {
 			if (!str.isEmpty()) {
