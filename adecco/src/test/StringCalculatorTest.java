@@ -61,4 +61,8 @@ class StringCalculatorTest {
 	void ignoreNumberBiggerThanThousand() {
 		assertEquals(2, cal.add("2,1001"));
 	}
+	@Test
+	void sumThreeNumbersSeperatedByAnyDelimiterOfAnyLength() {
+		assertEquals(6, cal.add("//[***]\n1***2***3"));
+	}
 }
