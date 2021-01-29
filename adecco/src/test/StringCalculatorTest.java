@@ -30,5 +30,9 @@ class StringCalculatorTest {
 	void sumThreeNumbersSeperatedByCommaAndNewline() {
 		assertEquals(6, cal.add("1\n2,3"));
 	}
+	@Test
+	void sumTwoNumbersSeperatedByAnyDelimiter() {
+		assertEquals(3, cal.add("//;\n1;2"));
+	}
 
 }
