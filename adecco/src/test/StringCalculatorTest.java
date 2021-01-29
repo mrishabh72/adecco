@@ -22,9 +22,9 @@ class StringCalculatorTest {
 	void sumOneNumber() {
 		assertEquals(1, cal.add("1"));
 	}
-//	@Test
-//	void sumTwoNumbersSeperatedByComma() {
-//		assertEquals(3, cal.add("1,2"));
-//	}
+	@Test
+	void sumFourNumbersSeperatedByComma() {
+		assertEquals(9, cal.add("1,2,4,2"));
+	}
 
 }

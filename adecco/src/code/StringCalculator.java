@@ -8,10 +8,12 @@ public class StringCalculator {
 			return 0;
 		} else if (strs.length == 1) {
 			return Integer.parseInt(strs[0]);
-		} else if (strs.length == 2) {
-			int no1 = Integer.parseInt(strs[0]);
-			int no2 = Integer.parseInt(strs[1]);
-			return no1 + no2;
+		} else if (strs.length > 1) {
+			int sum = 0;
+			for(String str:strs) {
+				sum+=Integer.parseInt(str);
+			}
+			return sum;
 		}
 		return 0;
 	}
