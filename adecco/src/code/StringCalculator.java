@@ -17,22 +17,15 @@ public class StringCalculator {
 			delimiter = new StringBuilder("");
 			numbers = numbers.substring(numbers.indexOf("["));
 
-			List<StringBuilder> regBlock = new ArrayList<>();
 			while (numbers.contains("[")) {
 				String seperatorPattern = numbers.substring(numbers.indexOf("[") + 1, numbers.indexOf("]"));
-				char[] seperatorPatternChars = seperatorPattern.toCharArray();
-				for (int i = 0; i < seperatorPatternChars.length; i++) {
-					if (i >= regBlock.size()) {
-						regBlock.add(new StringBuilder());
-					}
-					regBlock.get(i).append(seperatorPatternChars[i]);
-
+				for (char c : seperatorPattern.toCharArray()) {
+					delimiter.append("[").append(c).append("]");
 				}
+				delimiter.append("|");
 				numbers = numbers.substring(numbers.indexOf("]") + 1);
 			}
-			for (StringBuilder reg : regBlock) {
-				delimiter.append("[").append(reg).append("]");
-			}
+			delimiter.deleteCharAt(delimiter.length()-1);
 		} else if (numbers.startsWith("//")) {
 			delimiter = new StringBuilder(numbers.substring(2, numbers.indexOf("\n")));
 			numbers = numbers.substring(2 + delimiter.length());
