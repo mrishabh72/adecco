@@ -1,6 +1,8 @@
 package test;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,5 +36,26 @@ class StringCalculatorTest {
 	void sumTwoNumbersSeperatedByAnyDelimiter() {
 		assertEquals(3, cal.add("//;\n1;2"));
 	}
-
+	@Test
+	void throwExceptionWhenAddingNegativeNumber() {
+		Exception ex = assertThrows(RuntimeException.class, ()->cal.add("1,-3"));
+		String desiredMsg = "negatives not allowed - -3,";
+		String resultMsg = ex.getMessage();
+		assertTrue(desiredMsg.equals(resultMsg));
+	}
+	@Test
+	void throwExceptionWhenAddingTwoNegativeNumbers() {
+		Exception ex = assertThrows(RuntimeException.class, ()->cal.add("-1,-3"));
+		String desiredMsg = "negatives not allowed - -1,-3,";
+		String resultMsg = ex.getMessage();
+		assertTrue(desiredMsg.equals(resultMsg));
+	}
+	@Test
+	void throwExceptionWhenAddingNegativeNumberWithCustomDelimiter() {
+		Exception ex = assertThrows(RuntimeException.class, ()->cal.add("//;\n1;-2"));
+		String desiredMsg = "negatives not allowed - -2,";
+		String resultMsg = ex.getMessage();
+		assertTrue(desiredMsg.equals(resultMsg));
+	}
+	
 }
