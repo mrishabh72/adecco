@@ -3,19 +3,18 @@ package code;
 public class StringCalculator {
 
 	public int add(String numbers) {
-		String[] strs = numbers.split(",");
-		if (strs[0].isEmpty()) {
-			return 0;
-		} else if (strs.length == 1) {
-			return Integer.parseInt(strs[0]);
-		} else if (strs.length > 1) {
-			int sum = 0;
-			for(String str:strs) {
-				sum+=Integer.parseInt(str);
+		int sum = 0;
+		String[] line = numbers.split("\n");
+
+		for (String str : line) {
+			String[] strs = str.split(",");
+			if (!strs[0].isEmpty()) {
+				for (String strNum : strs) {
+					sum += Integer.parseInt(strNum);
+				}
 			}
-			return sum;
 		}
-		return 0;
+		return sum;
 	}
 
 }

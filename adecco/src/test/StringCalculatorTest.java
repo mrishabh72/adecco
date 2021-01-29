@@ -26,5 +26,9 @@ class StringCalculatorTest {
 	void sumFourNumbersSeperatedByComma() {
 		assertEquals(9, cal.add("1,2,4,2"));
 	}
+	@Test
+	void sumThreeNumbersSeperatedByCommaAndNewline() {
+		assertEquals(6, cal.add("1\n2,3"));
+	}
 
 }
